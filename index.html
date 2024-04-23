@@ -78,8 +78,9 @@
     <script type="text/javascript" src="./datos/Leaflet.LinearMeasurement-master/src/Leaflet.LinearMeasurement.js"></script>
     <script type="text/javascript" src="./datos/geolet.js"></script>
     <script type="module" src="script.js"></script>
-    <input type="file" id="geojsonFileInput" accept=".geojson">
-    <button id="clearGeoJSONButton">Clear GeoJSON Layer</button>
+    <button id="uploadButton">Upload GeoJSON file</button>
+    <span id="fileName"></span>
+    <input type="file" id="hiddenFileInput" accept=".geojson" style="display: none;">
     <button id="clearALL">Clear ALL</button>
     <div id="legend"></div>
 
