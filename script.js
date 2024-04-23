@@ -2,7 +2,18 @@
 //const origin = { lat: 25.31644, lng: 51.48708 };
 //const destination = { lat: 25.26743, lng: 51.52502 };
 
-const apiKey = 'yPMFk-Bg30LOe8Msg8G0NxNTbgG2urzgfTjJcFZghYs'; // Replace with your actual HERE API key
+/* 
+jhQEnzWNs81wkEHmTHrEWKXvCd_rZ3HzifDQSNr1FM8
+sB0GL6tlSY552sugzmoOJ5xBCAxgBXiE-XxjE5_OqmU
+
+yPMFk-Bg30LOe8Msg8G0NxNTbgG2urzgfTjJcFZghYs
+fMg9FNcT9S4o3dsFu4F2bWAPQqVJ8o55OPOpiSgT-qE
+
+MCakrvXlXFvGDz8cSbkPQwmgMl96xGlZEZ5zlumeYyQ
+Hdm8Sa8Iw5psGRG2OCGM2Y3m-aRRSkCy0KbaYDy30Ww
+*/
+
+const apiKey = 'jhQEnzWNs81wkEHmTHrEWKXvCd_rZ3HzifDQSNr1FM8'; // Replace with your actual HERE API key
 import { decode } from "./datos/flexible_polyline.js";
 
 const buttonAd = document.getElementById("getRoute");
@@ -472,6 +483,8 @@ new searchControl().addTo(mymap);
 
 let geoJSONLayer;
 let legend = document.getElementById("legend");
+const uploadButton = document.getElementById("uploadButton");
+const hiddenFileInput = document.getElementById("hiddenFileInput");
 
 // Function to handle file selection
 function handleFileSelect(event) {
@@ -483,6 +496,12 @@ function handleFileSelect(event) {
         const geojsonData = JSON.parse(content);
         addGeoJSONLayer(geojsonData);
         addToLegend(geojsonData);
+
+        // Update the file name display
+        const fileNameSpan = document.getElementById("fileName");
+        if (fileNameSpan) {
+            fileNameSpan.textContent = `${file.name}`;
+        }
     };
 
     reader.readAsText(file);
@@ -507,17 +526,6 @@ function addGeoJSONLayer(geojsonData) {
     geoJSONLayer = L.geoJSON(geojsonData).addTo(mymap);
 }
 
-
-// Function to clear GeoJSON layer from the map
-function clearGeoJSONLayer() {
-    if (geoJSONLayer) {
-        mymap.removeLayer(geoJSONLayer);
-    }
-
-    // Clear file input field
-    document.getElementById("geojsonFileInput").value = "";
-    removeFromLegend();
-}
 
 // Function to add GeoJSON layer name to the legend
 function addToLegend(geojsonData) {
@@ -566,8 +574,14 @@ function clearALL(url_multipolygon) {
         url_multipolygon = ''; // Reset url_multipolygon variable
     }
 
-    // Clear file input field
-    document.getElementById("geojsonFileInput").value = "";
+    // Clear file input field if it exists
+    const fileInput = document.getElementById("geojsonFileInput");
+    if (fileInput) {
+        fileInput.value = "";
+    }
+
+    // Clear filename display
+    document.getElementById("fileName").textContent = "";
 
     // Clear duration and distance data
     document.getElementById("duration").textContent = "";
@@ -577,12 +591,14 @@ function clearALL(url_multipolygon) {
 }
 
 
+// Event listener for the upload button
+uploadButton.addEventListener("click", function() {
+    hiddenFileInput.click(); // Trigger click event on the hidden file input
+});
 
-// Add event listener to the file input element
-document.getElementById("geojsonFileInput").addEventListener("change", handleFileSelect);
+// Event listener for the file input element
+hiddenFileInput.addEventListener("change", handleFileSelect);
 
-// Add event listener to the "Clear GeoJSON Layer" button
-document.getElementById("clearGeoJSONButton").addEventListener("click", clearGeoJSONLayer);
 
 // Add event listener to the "clear ALL" button
 document.getElementById("clearALL").addEventListener("click", clearALL);
