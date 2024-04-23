@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Routing HERE</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-polylinedecorator@1.2.0/dist/leaflet.polylineDecorator.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./datos/Leaflet-MiniMap-master/dist/Control.MiniMap.min.css">    
+    <link rel="stylesheet" type="text/css" href="./datos/leaflet.fullscreen-master/Control.FullScreen.css">
+    <link rel="stylesheet" type="text/css" href="./datos/Leaflet.LinearMeasurement-master/src/Leaflet.LinearMeasurement.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/@turf/turf"></script>
+
+</head>
+
+<body>
+    <h1 id="run">Routing HERE Doha (QATAR)</h1>
+    <div id="legend"></div>
+
+    <div class="container-map-example"> 
+        <p>Set the coordinates in WGS84 or click two points on the map </p>
+
+        <label for="lat_input">Initial coordinates:
+            <p></p>
+            <input type="text" id="lat_input" name="Latitude" size="10" value="25.31644" />
+            <span class="txt-small">Latitude</span>
+            <input type="text" id="lng_input" name="longitude" size="10" value="51.48708" />
+            <span class="txt-small">Longitude</span>
+        </label>
+        <p></p>
+
+        <label for="lat_input_dest">End coordinates:
+            <p></p>
+            <input type="text" id="lat_input_dest" name="Latitude" size="10" value="25.23944" />
+            <span class="txt-small">Latitude</span>
+            <input type="text" id="lng_input_dest" name="longitude" size="10" value="51.55839" />
+            <span class="txt-small">Longitude</span>
+        </label>
+        <p></p>
+
+        <select id="select">
+            <option value="car">car</option>
+            <option value="pedestrian">pedestrian</option>
+            <option value="bicycle">bicycle</option>
+        </select>
+        <p></p>
+
+        <button id="getRoute">GET ROUTE</button>
+        <p></p>
+
+        <!-- Display the duration -->
+        <span id="duration"> </span>
+
+        <!-- Display the distance -->
+        <span id="distance"> </span>
+
+    </div>
+
+    <div id="mapid2" style="padding-top: 20px;"></div>
+
+    <div id="mapid"></div>
+    <ul id="authors"></ul>
+    <script type="module" src="./datos/flexible_polyline.js"></script>
+    <script type="text/javascript" src="./datos/Leaflet-MiniMap-master/dist/Control.MiniMap.min.js"></script>    
+    <script type="text/javascript" src="./datos/leaflet.fullscreen-master/Control.FullScreen.js"></script>
+    <script type="text/javascript" src="./datos/Leaflet.LinearMeasurement-master/src/Leaflet.LinearMeasurement.js"></script>
+    <script type="text/javascript" src="./datos/geolet.js"></script>
+    <script type="module" src="script.js"></script>
+    <input type="file" id="geojsonFileInput" accept=".geojson">
+    <button id="clearGeoJSONButton">Clear GeoJSON Layer</button>
+    <button id="clearALL">Clear ALL</button>
+    <div id="legend"></div>
+
+
+
+
+</body>
+
+</html>
